@@ -1,4 +1,4 @@
-package hu.maven.Components;
+package hu.maven.Components.View;
 
 import java.io.IOException;
 
@@ -14,7 +14,7 @@ public class BoardGameApplication extends Application {
     public void start(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/ui.fxml"));
         stage.setTitle("JavaFX Board Game Example");
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root,1000, 1000);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();

@@ -1,4 +1,4 @@
-import hu.maven.Components.BoardGameApplication;
+import hu.maven.Components.View.BoardGameApplication;
 import javafx.application.Application;
 
 public class App {
