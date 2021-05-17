@@ -1,5 +1,7 @@
 package hu.maven.Components.Model;
-
+/**
+ *Az osztály meghatározza, hogy melyik játékos köre zajlik.
+ */
 public enum Turn {
     /**
      * Első játékos köre.
@@ -11,6 +13,10 @@ public enum Turn {
      */
     PLAYER2 ;
 
+    /**
+     * Játékosváltásért felelő metódus.
+     * @return  a {@code Turn}
+     */
     public Turn otherPlayer(){
         if(this.equals(PLAYER1)){
             return PLAYER2;
@@ -18,5 +24,6 @@ public enum Turn {
             return PLAYER1;
         }
     }
+
 }
 
