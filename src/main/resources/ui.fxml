@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.maven.Components.Controller.BoardGameController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="900.0" style="-fx-background-color: #762e80;" stylesheets="@ui.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.maven.Components.Controller.BoardGameController">
    <center>
-      <GridPane fx:id="board" hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@ui.css" vgap="40.0" BorderPane.alignment="TOP_CENTER">
+      <GridPane fx:id="board" alignment="TOP_CENTER" hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@ui.css" vgap="40.0" BorderPane.alignment="TOP_CENTER">
           <columnConstraints>
               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -28,6 +28,6 @@
       </GridPane>
    </center>
    <bottom>
-       <Button fx:id="button" mnemonicParsing="false" onAction="#buttonClick" text="End Turn" BorderPane.alignment="CENTER" />
+       <Button fx:id="button" mnemonicParsing="false" onAction="#buttonClick" prefHeight="81.0" prefWidth="148.0" text="End Turn" BorderPane.alignment="CENTER" />
    </bottom>
 </BorderPane>
