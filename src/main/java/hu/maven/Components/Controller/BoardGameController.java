@@ -2,6 +2,7 @@ package hu.maven.Components.Controller;
 
 import hu.maven.Components.Model.Board;
 import hu.maven.Components.Model.Position;
+import hu.maven.Components.Model.Turn;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,8 +17,9 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
-import java.awt.*;
+import javafx.scene.control.TextField;
 import java.io.IOException;
+import java.util.HashMap;
 
 import static javafx.scene.paint.Color.*;
 
@@ -29,10 +31,9 @@ public class BoardGameController {
     private GridPane board;
 
     @FXML
-    public javafx.scene.control.Label player1;
+    public TextField playerName;
 
-    @FXML
-    public Label player2;
+    HashMap<Turn, String> playerNames;
 
 
     @FXML
@@ -44,6 +45,12 @@ public class BoardGameController {
             }
         }
         gameState = new Board();
+
+    }
+
+    public void setPlayerNames(HashMap<Turn, String> playerNames) {
+        this.playerNames = playerNames;
+        playerName.setText(playerNames.get(gameState.getPlayer()));
     }
 
     private StackPane createSquare() {
@@ -108,6 +115,7 @@ public class BoardGameController {
         }
 
         gameState.resetSelected();
+        playerName.setText(playerNames.get(gameState.getPlayer()));
 
         if(playerWon()) {
             endGame(actionEvent);
@@ -115,10 +123,6 @@ public class BoardGameController {
 
     }
 
-    public void setPlayers(String player1, String player2) {
-        this.player1.setText(player1);
-        this.player2.setText(player2);
-    }
 
     public boolean playerWon(){
 
@@ -142,12 +146,14 @@ public class BoardGameController {
         Parent root = null;
         try {
             root = fxmlLoader.load();
+            var controller = (EndScreen)fxmlLoader.getController();
+            controller.setWinnerName(playerNames.get(gameState.getPlayer()));
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
 
     }
 

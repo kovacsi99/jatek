@@ -1,5 +1,7 @@
 package hu.maven.Components.Controller;
 
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -14,10 +16,18 @@ import java.io.IOException;
 
 public class EndScreen {
 
+    @FXML
     public TextField winner;
 
-    public void winnerPrinted(){
-        winner.setText();
+    public void setWinnerName(String winnerName) {
+        winner.setText(winnerName);
     }
 
+
+
+    @FXML
+    void quitButton(){
+        //logger.info("Clicked on Quit button");
+        Platform.exit();
+    }
 }

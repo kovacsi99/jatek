@@ -17,6 +17,7 @@ import hu.maven.Components.Model.Board;
 //import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 
 public class MainMenu {
@@ -56,10 +57,19 @@ public class MainMenu {
         }
     }
 
-    private void startGame(MouseEvent mouseEvent, String filename) throws IOException {
+    private HashMap<Turn, String> getPlayerNames() {
+        var players = new HashMap<Turn, String>();
+        players.put(Turn.PLAYER1, player1.getText());
+        players.put(Turn.PLAYER2, player2.getText());
 
+        return  players;
+    }
+
+    private void startGame(MouseEvent mouseEvent, String filename) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(filename));
         Parent root = fxmlLoader.load();
+        var controller = (BoardGameController)fxmlLoader.getController();
+        controller.setPlayerNames(getPlayerNames());
         Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();

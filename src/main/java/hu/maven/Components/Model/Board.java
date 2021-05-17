@@ -129,6 +129,9 @@ public class Board{
         return true;
     }
 
+    public Turn getPlayer() {
+        return player;
+    }
 
     public static void main(String[] args) {
         var model = new Board();
@@ -136,4 +139,3 @@ public class Board{
     }
 
 }
-
