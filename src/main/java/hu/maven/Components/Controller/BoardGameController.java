@@ -109,9 +109,9 @@ public class BoardGameController {
 
         gameState.resetSelected();
 
-       /* if(playerWon()) {
+        if(playerWon()) {
             endGame(actionEvent);
-        }*/
+        }
 
     }
 
@@ -120,7 +120,7 @@ public class BoardGameController {
         this.player2.setText(player2);
     }
 
-    /*public boolean playerWon(){
+    public boolean playerWon(){
 
         for(int i = 0; i< 4 ;++i) {
             for(int j = 0; j< 4; ++j) {
@@ -149,6 +149,6 @@ public class BoardGameController {
         stage.setScene(new Scene(root));
         stage.show();
 
-    }*/
+    }
 
 }
