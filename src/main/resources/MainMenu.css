@@ -1,0 +1,7 @@
+.square {
+    -fx-border-style: solid;
+}
+
+.button{
+    -fx-border-color: black;
+}
