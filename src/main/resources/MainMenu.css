@@ -2,6 +2,12 @@
     -fx-border-style: solid;
 }
 
-.button{
-    -fx-border-color: black;
+.button:hover {
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+}
+
+.text-field{
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
 }

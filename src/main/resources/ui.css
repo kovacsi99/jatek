@@ -2,6 +2,18 @@
     -fx-border-style: solid;
 }
 
-.square:hover {
-    -fx-background-color: #427a82;
+.square{
+    -fx-background-color: #bfcd41;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+}
+.square:hover{
+    -fx-background-color: #921b1b;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+}
+.button:hover{
+    -fx-background-color: #921b1b;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
 }

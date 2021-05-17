@@ -7,17 +7,17 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="900.0" stylesheets="@EndGame.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.maven.Components.View.EndScreen">
    <children>
-      <TextField alignment="CENTER" layoutY="79.0" prefHeight="220.0" prefWidth="900.0" text="Congrats,">
+      <TextField alignment="CENTER" editable="false" layoutY="79.0" pickOnBounds="false" prefHeight="220.0" prefWidth="900.0" text="Congrats,">
          <font>
             <Font name="Times New Roman" size="60.0" />
          </font>
       </TextField>
-      <TextField fx:id="winner" alignment="CENTER" layoutY="297.0" prefHeight="162.0" prefWidth="900.0">
+      <TextField fx:id="winner" alignment="CENTER" editable="false" layoutY="297.0" pickOnBounds="false" prefHeight="162.0" prefWidth="900.0">
          <font>
             <Font name="Times New Roman" size="40.0" />
          </font>
       </TextField>
-      <TextField alignment="CENTER" layoutY="458.0" prefHeight="162.0" prefWidth="900.0" text="Won!">
+      <TextField alignment="CENTER" editable="false" layoutY="458.0" pickOnBounds="false" prefHeight="162.0" prefWidth="900.0" text="Won!">
          <font>
             <Font name="Times New Roman" size="60.0" />
          </font>

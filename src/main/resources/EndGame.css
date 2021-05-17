@@ -1,4 +1,12 @@
+body{
+    background-color: antiquewhite;
+}
+
 .square {
     -fx-border-style: solid;
 }
 
+.button:hover {
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+}
