@@ -1,7 +1,5 @@
 package hu.maven.Components.Model;
 
-import javafx.geometry.Pos;
-
 /**
  * Ez a {@link Record} számolja ki a kavicsok pozícióját.
  * @param row sor

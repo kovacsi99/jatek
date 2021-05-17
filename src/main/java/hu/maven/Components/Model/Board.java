@@ -1,10 +1,8 @@
 package hu.maven.Components.Model;
 
 import javafx.beans.property.ReadOnlyObjectWrapper;
-import org.tinylog.Logger;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 
 /**
  * Ez a {@link Class} felelős a játék logikájának és szabályainak betartatásáért.
