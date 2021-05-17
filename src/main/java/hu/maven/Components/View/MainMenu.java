@@ -1,5 +1,6 @@
-package hu.maven.Components.Controller;
+package hu.maven.Components.View;
 
+import hu.maven.Components.Controller.BoardGameController;
 import hu.maven.Components.Model.Turn;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -13,46 +14,72 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import hu.maven.Components.Model.Board;
+import org.tinylog.Logger;
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.HashMap;
 
-
+/**
+ * A {@link Class} indítja el a Main Menut.
+ */
 public class MainMenu {
+    /**
+     * Az első játékos.
+     */
     @FXML
     public javafx.scene.control.TextField player1;
 
+    /**
+     * A második játékos.
+     */
     @FXML
     public javafx.scene.control.TextField player2;
 
+    /**
+     * Üzenet.
+     */
     @FXML
     public Label prompt;
 
+    /**
+     * Elrejti a hibaüzeneteket indításkor.
+     */
     public void initialize(){
-        //logger.info("Initializing Launch scene");
+        Logger.info("Started the menu!");
         prompt.setVisible(false);
     }
 
+    /**
+     *Segéd {@link java.lang.reflect.Method} a hibaüzenetek kiiratásához.
+     *@param message hibaüzenet
+     */
     public void setPrompt(String message){
         prompt.setText(message);
         prompt.setVisible(true);
-        //logger.info(message);
+        Logger.warn(message);
     }
 
+    /**
+     * A {@link java.lang.reflect.Method} elínditja a játékot gombnyomásra.
+     * @param mouseEvent gombnyomás
+     * @throws IOException rossz adatbevitel esetén
+     */
     @FXML
     public void startMenu(MouseEvent mouseEvent) throws IOException {
-        //logger.info("Clicked on Start Game Button");
-        if (player1.getText().isEmpty() || player2.getText().isEmpty()) {
-            setPrompt("Please enter a nickname!");
-        }else if(player1.getText().length() > 15){
+        if (player1.getText().isEmpty()) {
+            setPrompt("Please enter a nickname Player 1!");
+        }else if(player2.getText().isEmpty()){
+            setPrompt("Please enter a nickname Player 2!");
+        } else if(player1.getText().length() > 15){
             setPrompt("I can't remember a nickname that long Player 1!");
         }else if(player2.getText().length() > 15){
             setPrompt("I can't remember a nickname that long player 2!");
         }else if(player2.getText().equals(player1.getText())){
             setPrompt("Don't play against yourself,you can't beat that guy!");
         }else {
+            Logger.info("Enjoy the Game! Last One Standing Loses!");
             startGame(mouseEvent, "/ui.fxml");
         }
     }
@@ -77,7 +104,7 @@ public class MainMenu {
     }
     @FXML
     void exitButton(){
-        //logger.info("Clicked on Quit button");
+        Logger.info("Have You Changed Your Mind? Have a Nice Day Then!");
         Platform.exit();
     }
 }

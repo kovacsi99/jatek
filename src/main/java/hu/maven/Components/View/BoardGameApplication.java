@@ -8,6 +8,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * A {@link Class} felel a játék elindításáért.
+ */
 public class BoardGameApplication extends Application {
 
     @Override

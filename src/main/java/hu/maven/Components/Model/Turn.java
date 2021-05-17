@@ -15,7 +15,7 @@ public enum Turn {
 
     /**
      * Játékosváltásért felelő metódus.
-     * @return  a {@code Turn}
+     * @return  a {@link Turn}
      */
     public Turn otherPlayer(){
         if(this.equals(PLAYER1)){
