@@ -1,27 +1,28 @@
 package hu.maven.Components.Model;
 
-import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.geometry.Pos;
-import hu.maven.Components.Controller.BoardGameController;
-import java.sql.PseudoColumnUsage;
+import org.tinylog.Logger;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 
 /**
- * Ez az osztály felelős a játék logikájának és szabályainak betartatásáért.
+ * Ez a {@link Class} felelős a játék logikájának és szabályainak betartatásáért.
  */
 public class Board{
 
     private Turn player;
 
+    /**
+     * A pálya mérete.
+     */
     public static int BOARD_SIZE = 4;
 
     private ReadOnlyObjectWrapper<Square>[][] board = new ReadOnlyObjectWrapper[BOARD_SIZE][BOARD_SIZE];
     private ArrayList<Position> selected;
 
     /**
-     * Létrehozza az asztal mátrixát {@code BOARD_SIZE} alapján, illetve a létrehozza a
+     * Ez a {@link java.lang.reflect.Constructor} létrehozza az asztal mátrixát  BOARD_SIZE alapján, illetve a létrehozza a
      * selected változót,amiben majd a kijelölt elemek pozícióját fogjuk tárolni.
      */
     public Board() {
@@ -35,8 +36,9 @@ public class Board{
     }
 
     /**
-     * A selected változót tölti fel a kijelölt elemek pozíciójával.
-     * @param position
+     *Ez a {@link java.lang.reflect.Method} a selected változót tölti fel a {@link Position}-t.
+     * @throws IllegalArgumentException , ha az adott {@link Position} már szerepel benne.
+     * @param position pozíció
      */
     public void addSelected(Position position) {
         for (var p : selected) {
@@ -48,6 +50,10 @@ public class Board{
         selected.add(position);
     }
 
+    /**
+     *Ez a {@link java.lang.reflect.Method} eltávolítja a selected-ben szereplő adott pozíciót.
+     * @param position pozíció
+     */
     public void removeSelected(Position position) {
         for (var p: selected) {
             if(p.equals(position)) {
@@ -56,34 +62,33 @@ public class Board{
             }
         }
     }
-
+    /**
+     *Ez a {@link java.lang.reflect.Method} egy másolatot készít a selectedről.
+     * @return {@link ArrayList} a selected másolata
+     */
     public ArrayList<Position> getSelected() {
         return (ArrayList<Position>) selected.clone();
     }
 
+    /**
+     *Ez a {@link java.lang.reflect.Method} clear-eli a selected-et.
+     */
     public void resetSelected() {
         selected.clear();
     }
 
-    public ReadOnlyObjectProperty<Square> squareProperty(int i, int j) {
-        return board[i][j].getReadOnlyProperty();
-    }
-
-    public Square getSquare(int i, int j) {
-        return board[i][j].get();
-    }
-
-    public void move(int i, int j) {
-        board[i][j].set(
-                switch (board[i][j].get()) {
-                    case ROCK, NONE -> Square.NONE;
-                }
-        );
-    }
-    public void changePlayer() {
+    /**
+     *Ez a {@link java.lang.reflect.Method} azért felel,hogy a 2 játékos között megtörténjen a váltás.
+     * @return {@link Turn}-höz megfelelő playert.
+     */
+    public Turn changePlayer() {
         this.player = this.player.otherPlayer();
+        return this.player;
     }
-
+    /**
+     *Ez a {@link java.lang.reflect.Method} a pálya állapotáról ad vissza egy sztringet.
+     * @return {@link String}
+     */
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < BOARD_SIZE; i++) {
@@ -94,48 +99,54 @@ public class Board{
         }
         return sb.toString();
     }
-    public boolean isValidSelection(){
-        if(selected.size()<1 || selected.size()>4){
+
+    /**
+     *A {@link java.lang.reflect.Method} nézi meg, hogy a selected elemek egy sorban vagy oszlopban vannak-e.
+     * @return {@link Boolean} igaz/hamis
+     */
+    public boolean isSameRowOrCol(){
+        if(selected.size() == 1) {
+            return true;
+        } else if(selected.size()<1 || selected.size()>4){
             return false;
+        } else {
+            return isSameCol() || isSameRow();
         }
+    }
+
+    /**
+     * A {@link java.lang.reflect.Method} ellenőrzi,hogy egy sorban vannak-e az elemek.
+     * @return {@link Boolean} igaz/hamis
+     */
+    public boolean isSameRow() {
         var rows = new ArrayList<Integer>();
-        var cols = new ArrayList<Integer>();
+
         for(var p: selected){
             rows.add(p.row());
+        }
+
+        return rows.stream()
+                .allMatch(rows.get(0)::equals);
+    }
+
+    /**
+     * A {@link java.lang.reflect.Method} ellenőrzi,hogy egy oszlopban vannak-e az elemek.
+     * @return {@link Boolean} igaz/hamis
+     */
+    public boolean isSameCol(){
+        var cols = new ArrayList<Integer>();
+        for(var p: selected){
             cols.add(p.col());
         }
 
-        Boolean sameRow = rows.stream()
-                .allMatch(rows.get(0)::equals);
-
-        Boolean sameCols =   cols.stream()
+        return cols.stream()
                 .allMatch(cols.get(0)::equals);
-
-        if (!(sameRow || sameCols)) {
-            return false;
-        }
-
-        if(sameRow) {
-            selected.sort(Comparator.comparingInt(Position::col));
-        } else {
-            selected.sort(Comparator.comparingInt(Position::row));
-        }
-
-        for(int i = 1;i < selected.size(); i++){
-            if(!selected.get(i).isNeighbour(selected.get(i-1)))
-                return false;
-
-        }
-        return true;
     }
-
+    /**
+     *Ez a {@link java.lang.reflect.Method} az aktuális player lekérdezésére szolgál.
+     * @return {@link Turn} player
+     */
     public Turn getPlayer() {
         return player;
     }
-
-    public static void main(String[] args) {
-        var model = new Board();
-        System.out.println(model);
-    }
-
 }
