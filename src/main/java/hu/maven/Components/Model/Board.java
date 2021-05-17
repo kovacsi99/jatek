@@ -3,10 +3,14 @@ package hu.maven.Components.Model;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.geometry.Pos;
-
+import hu.maven.Components.Controller.BoardGameController;
 import java.sql.PseudoColumnUsage;
 import java.util.ArrayList;
+import java.util.Comparator;
 
+/**
+ * Ez az osztály felelős a játék logikájának és szabályainak betartatásáért.
+ */
 public class Board{
 
     private Turn player;
@@ -16,6 +20,10 @@ public class Board{
     private ReadOnlyObjectWrapper<Square>[][] board = new ReadOnlyObjectWrapper[BOARD_SIZE][BOARD_SIZE];
     private ArrayList<Position> selected;
 
+    /**
+     * Létrehozza az asztal mátrixát {@code BOARD_SIZE} alapján, illetve a létrehozza a
+     * selected változót,amiben majd a kijelölt elemek pozícióját fogjuk tárolni.
+     */
     public Board() {
         player = Turn.PLAYER1;
         for (int i = 0; i < BOARD_SIZE; i++) {
@@ -26,6 +34,10 @@ public class Board{
         selected = new ArrayList<Position>();
     }
 
+    /**
+     * A selected változót tölti fel a kijelölt elemek pozíciójával.
+     * @param position
+     */
     public void addSelected(Position position) {
         for (var p : selected) {
             if(p.equals(position)) {
@@ -82,7 +94,40 @@ public class Board{
         }
         return sb.toString();
     }
+    public boolean isValidSelection(){
+        if(selected.size()<1 || selected.size()>4){
+            return false;
+        }
+        var rows = new ArrayList<Integer>();
+        var cols = new ArrayList<Integer>();
+        for(var p: selected){
+            rows.add(p.row());
+            cols.add(p.col());
+        }
 
+        Boolean sameRow = rows.stream()
+                .allMatch(rows.get(0)::equals);
+
+        Boolean sameCols =   cols.stream()
+                .allMatch(cols.get(0)::equals);
+
+        if (!(sameRow || sameCols)) {
+            return false;
+        }
+
+        if(sameRow) {
+            selected.sort(Comparator.comparingInt(Position::col));
+        } else {
+            selected.sort(Comparator.comparingInt(Position::row));
+        }
+
+        for(int i = 1;i < selected.size(); i++){
+            if(!selected.get(i).isNeighbour(selected.get(i-1)))
+                return false;
+
+        }
+        return true;
+    }
 
 
     public static void main(String[] args) {
@@ -91,5 +136,4 @@ public class Board{
     }
 
 }
-
 

@@ -2,19 +2,22 @@ package hu.maven.Components.Controller;
 
 import hu.maven.Components.Model.Board;
 import hu.maven.Components.Model.Position;
-import hu.maven.Components.Model.Square;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
 
 import java.awt.*;
+import java.io.IOException;
 
 import static javafx.scene.paint.Color.*;
 
@@ -24,6 +27,13 @@ public class BoardGameController {
 
     @FXML
     private GridPane board;
+
+    @FXML
+    public javafx.scene.control.Label player1;
+
+    @FXML
+    public Label player2;
+
 
     @FXML
     private void initialize() {
@@ -86,6 +96,9 @@ public class BoardGameController {
 
 
     public void buttonClick(ActionEvent actionEvent) {
+        if(!gameState.isValidSelection()){
+            return;
+        }
         gameState.changePlayer();
 
         for(var p: gameState.getSelected()) {
@@ -96,6 +109,46 @@ public class BoardGameController {
 
         gameState.resetSelected();
 
-        System.out.println("Change player");
+       /* if(playerWon()) {
+            endGame(actionEvent);
+        }*/
+
     }
+
+    public void setPlayers(String player1, String player2) {
+        this.player1.setText(player1);
+        this.player2.setText(player2);
+    }
+
+    /*public boolean playerWon(){
+
+        for(int i = 0; i< 4 ;++i) {
+            for(int j = 0; j< 4; ++j) {
+                var square = (StackPane) getNodeFromGridPane(i, j);
+                var coin = (Circle) square.getChildren().get(0);
+                if(!coin.getFill().equals(TRANSPARENT)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+
+    private void endGame(ActionEvent actionEvent){
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/EndGame.fxml"));
+        Parent root = null;
+        try {
+            root = fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+
+    }*/
+
 }
