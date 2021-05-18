@@ -33,7 +33,7 @@
         <Button fx:id="button" mnemonicParsing="false" onAction="#buttonClick" prefHeight="81.0" prefWidth="148.0" text="End Turn" BorderPane.alignment="CENTER" />
     </bottom>
     <top>
-        <TextField fx:id="playerName" alignment="CENTER" BorderPane.alignment="CENTER">
+        <TextField fx:id="playerName" alignment="CENTER" editable="false" pickOnBounds="false" BorderPane.alignment="CENTER">
          <font>
             <Font name="Times New Roman" size="30.0" />
          </font></TextField>
