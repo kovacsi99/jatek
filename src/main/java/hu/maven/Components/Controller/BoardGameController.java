@@ -3,6 +3,8 @@ package hu.maven.Components.Controller;
 import hu.maven.Components.Model.Board;
 import hu.maven.Components.Model.Position;
 import hu.maven.Components.Model.Turn;
+import hu.maven.Components.Ranking.Result;
+import hu.maven.Components.Ranking.LeaderBoardManager;
 import hu.maven.Components.View.EndScreen;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,10 +16,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
-
 import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.util.HashMap;
@@ -91,7 +91,6 @@ public class BoardGameController {
     private void handleMouseClick(MouseEvent event) {
         var square = (StackPane) event.getSource();
         var coin = (Circle) square.getChildren().get(0);
-        Paint fill = coin.getFill();
 
 
         var row = GridPane.getRowIndex(square);
@@ -246,6 +245,9 @@ public class BoardGameController {
      * @param actionEvent gombnyomás
      */
     private void endGame(ActionEvent actionEvent){
+
+        var manager = new LeaderBoardManager();
+        manager.newResult(new Result(playerNames.get(Turn.PLAYER1), playerNames.get(Turn.PLAYER2), playerNames.get(gameState.getPlayer())));
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/EndGame.fxml"));
         Parent root = null;
