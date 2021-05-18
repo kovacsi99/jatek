@@ -21,8 +21,7 @@
     </developers>
 
     <name>jatek</name>
-    <!-- FIXME change it to the project's website -->
-    <url>http://www.example.com</url>
+    <url>https://github.com/kovacsi99/jatek</url>
 
     <scm>
         <developerConnection>scm:git:https://github.com/INBPM0420/homework-template-project.git</developerConnection>
