@@ -4,8 +4,9 @@ import hu.maven.Components.Model.Board;
 import hu.maven.Components.Model.Position;
 import hu.maven.Components.Model.Turn;
 import hu.maven.Components.Ranking.Result;
-import hu.maven.Components.Ranking.LeaderBoardManager;
+import hu.maven.Components.Ranking.jdbiConnection;
 import hu.maven.Components.View.EndScreen;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -246,9 +247,6 @@ public class BoardGameController {
      */
     private void endGame(ActionEvent actionEvent){
 
-        var manager = new LeaderBoardManager();
-        manager.newResult(new Result(playerNames.get(Turn.PLAYER1), playerNames.get(Turn.PLAYER2), playerNames.get(gameState.getPlayer())));
-
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/EndGame.fxml"));
         Parent root = null;
         try {
@@ -258,10 +256,19 @@ public class BoardGameController {
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
+            jdbiConnection.insert(new Result(playerNames.get(Turn.PLAYER1), playerNames.get(Turn.PLAYER2), playerNames.get(gameState.getPlayer())));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
 
+    /**
+     * Ez a {@link java.lang.reflect.Method} lép ki a programból az Exit gomb lenyomásával.
+     */
+    @FXML
+    void exitButton2(){
+        Logger.info("Have You Changed Your Mind? Have a Nice Day Then!");
+        Platform.exit();
+    }
 }

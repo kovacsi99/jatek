@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="900.0" style="-fx-background-color:#d5cd09;" stylesheets="@ui.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.maven.Components.Controller.BoardGameController">
@@ -30,7 +31,12 @@
         </GridPane>
     </center>
     <bottom>
-        <Button fx:id="button" mnemonicParsing="false" onAction="#buttonClick" prefHeight="81.0" prefWidth="148.0" text="End Turn" BorderPane.alignment="CENTER" />
+      <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+         <children>
+              <Button fx:id="button" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#buttonClick" prefHeight="81.0" prefWidth="148.0" text="End Turn" />
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#exitButton2" text="Exit" />
+         </children>
+      </VBox>
     </bottom>
     <top>
         <TextField fx:id="playerName" alignment="CENTER" editable="false" pickOnBounds="false" BorderPane.alignment="CENTER">

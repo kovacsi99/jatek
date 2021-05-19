@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.maven.Components.Controller.Scores">
+   <children>
+      <VBox layoutX="-1.0" layoutY="-1.0">
+         <children>
+            <TableView fx:id="tableView" prefHeight="324.0" prefWidth="600.0">
+              <columns>
+                <TableColumn fx:id="p1" prefWidth="189.0" text="Player 1" />
+                <TableColumn fx:id="p2" prefWidth="219.0" text="Player 2" />
+                  <TableColumn fx:id="winner" prefWidth="191.0" text="Winner" />
+              </columns>
+            </TableView>
+         </children>
+      </VBox>
+      <Button fx:id="exit3" layoutX="253.0" layoutY="343.0" mnemonicParsing="false" onAction="#exitButton3" text="Exit" />
+   </children>
+</AnchorPane>

@@ -2,6 +2,8 @@ package hu.maven.Components.View;
 
 import hu.maven.Components.Controller.BoardGameController;
 import hu.maven.Components.Model.Turn;
+import hu.maven.Components.Ranking.Result;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +15,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import org.tinylog.Logger;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -88,6 +91,7 @@ public class MainMenu {
     }
 
     private void startGame(MouseEvent mouseEvent, String filename) throws IOException {
+        String filePath = System.getProperty("user.home") + File.separator + ".results";
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(filename));
         Parent root = fxmlLoader.load();
         var controller = (BoardGameController)fxmlLoader.getController();
@@ -95,11 +99,11 @@ public class MainMenu {
         Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
-
     }
     @FXML
     void exitButton(){
         Logger.info("Have You Changed Your Mind? Have a Nice Day Then!");
         Platform.exit();
     }
+
 }

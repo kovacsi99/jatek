@@ -27,5 +27,6 @@
             <Font name="Times New Roman" size="20.0" />
          </font>
       </Button>
+      <Button layoutX="130.0" layoutY="763.0" mnemonicParsing="false" onAction="#highScores" text="Highscores" />
    </children>
 </AnchorPane>
